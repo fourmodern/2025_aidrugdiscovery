@@ -1,8 +1,8 @@
 # 2025 AI 신약개발 워크숍
 
-AI 기반 신약개발의 전 과정을 다루는 2일 집중 워크숍 실습 자료입니다.
+AI 기반 신약개발의 전 과정을 다루는 집중 워크숍 실습 자료입니다. Day 1 ~ Day 3로 구성됩니다.
 
-**일시:** 2025년 7월 21일 - 22일
+**일시:** Day 1 - Day 2: 2025년 7월 21일 - 22일 / Day 3: ADMET 특성 예측
 
 ---
 
@@ -46,8 +46,23 @@ AI 기반 신약개발의 전 과정을 다루는 2일 집중 워크숍 실습 �
 | t048 | DDPM | Denoising Diffusion Probabilistic Model 원리 학습 및 이미지 생성 실습 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t048_DDPM.ipynb) |
 | t050 | RAG | PDF 문서 기반 로컬 RAG 파이프라인 구축 (신약개발 질의응답) | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t050_simple-local-rag.ipynb) |
 | t110 | ESM-2 | ESM-2 단백질 언어 모델로 펩타이드 결합 최적화 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t110_esm2_peptide_optimization_tutorial.ipynb) |
+| t111 | **ESM3** | 생성형 멀티모달 단백질 모델로 서열 설계(inpainting) + 구조 예측 + 신뢰도(pTM/pLDDT) | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t111_esm3_protein_design.ipynb) |
 
 강의 슬라이드 PDF 3종이 `Day02/` 폴더에 포함되어 있습니다.
+
+`t111`은 워크숍 이후 추가된 실습입니다. `t110`(ESM-2)이 masked LM 스코어링 방식이라면, `t111`(ESM3)은 생성형 멀티모달 방식으로 같은 문제에 접근합니다.
+
+---
+
+## Day 3 - ADMET 특성 예측
+
+약물의 흡수·분포·대사·배설·독성(ADMET)을 데이터로 예측합니다. hERG 심장독성을 사례로 baseline과 딥러닝을 같은 조건에서 비교합니다.
+
+| 번호 | 주제 | 설명 | Colab |
+|------|------|------|-------|
+| T012 | ADMET / hERG 심장독성 | 데이터 정제 → ECFP+XGBoost baseline vs 그래프 신경망(D-MPNN)을 scaffold split으로 비교, SHAP 해석과 conformal 불확실성까지 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day3/T012_ADMET_hERG_Prediction.ipynb) |
+
+강의 슬라이드 PDF 4종이 `Day3/` 폴더에 포함되어 있습니다.
 
 ---
 
@@ -55,13 +70,19 @@ AI 기반 신약개발의 전 과정을 다루는 2일 집중 워크숍 실습 �
 
 | 파일 | 설명 | Colab |
 |------|------|-------|
-| qwen_tcga_advanced_2024.ipynb | Qwen LLM을 TCGA 암 데이터에 ORPO 방식으로 파인튜닝하는 고급 실습. GPU 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/qwen_tcga_advanced_2024.ipynb) |
+| qwen_tcga_advanced_2024.ipynb | Qwen3를 TCGA 암 데이터에 선호도 최적화(DPO/ORPO)로 파인튜닝하는 고급 실습. GPU 필수. 학습 데이터는 Google Drive에 별도로 준비해야 합니다 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/qwen_tcga_advanced_2024.ipynb) |
 
 ---
 
 ## 실행 환경
 
 모든 노트북은 Google Colab에서 바로 실행할 수 있습니다. 각 노트북 첫 셀에서 필요한 패키지를 자동으로 설치합니다.
+
+노트북은 현재 Colab 환경(Python 3.12 / PyTorch 2.11 / TensorFlow 2.20)에서 동작하도록 갱신되어 있습니다. 주요 변경 사항:
+
+- **3D 시각화는 py3Dmol을 사용합니다.** nglview는 ipywidgets 7 시대 라이브러리로 현재 Colab에서 렌더링되지 않습니다.
+- **opencadd 의존성을 제거했습니다.** 유지보수가 중단되어 Python 3.12에서 설치 자체가 실패합니다. KLIFS는 REST API를 직접 호출하고, 구조 정렬은 MDAnalysis로 처리합니다.
+- Colab에 이미 설치된 `torch`는 재설치하지 않습니다. 재설치하면 런타임의 CUDA 빌드와 어긋납니다.
 
 GPU가 필요한 노트북은 위 표의 GPU 열을 참고하세요.
 
