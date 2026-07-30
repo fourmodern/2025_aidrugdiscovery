@@ -75,8 +75,9 @@ AI 기반 신약개발의 전 과정을 다루는 집중 워크숍 실습 자료
 | 분자생성 파이프라인 | 통합 실습 | char-RNN 언어모델로 SMILES 생성 → 유효성·다양성·신규성 평가 → QED·SA 필터·시각화 (CPU에서 실행 가능한 소규모 데모) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day4/mol_generation_practical.ipynb) |
 | t041 | MolGen | 사전학습 분자 생성 모델(MolGen-large, SELFIES)로 신규 분자 생성 + 선택적 파인튜닝 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day4/t041_molgen.ipynb) |
 | t043 | VAE 분자 생성 | 그래프 VAE로 분자 잠재공간 학습 및 신규 분자 생성(QED 조건) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day4/t043_vae.ipynb) |
+| REINVENT4 | de novo 생성 + RL 최적화 | 산업계 표준 오픈소스 프레임워크(AstraZeneca). 사전학습 prior로 de novo 생성 → 평가·필터 → **QED 목적함수 강화학습(staged learning)**. GPU 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day4/reinvent4_denovo_optimization.ipynb) |
 
-> 생성 결과는 **후보 제안(가설)** 이며 실험(합성·assay) 검증 전까지 결론이 아닙니다. `mol_generation_practical`은 CPU로도 도는 개념 데모이고, `t041`(MolGen ~1.4GB 다운로드)·`t043`는 GPU 권장입니다.
+> 생성 결과는 **후보 제안(가설)** 이며 실험(합성·assay) 검증 전까지 결론이 아닙니다. `mol_generation_practical`은 CPU로도 도는 개념 데모이고, `t041`(MolGen ~1.4GB 다운로드)·`t043`는 GPU 권장, `reinvent4`는 **GPU 필수**(설치 수 분 + 설치 직후 런타임 1회 재시작이 필요할 수 있음)입니다.
 
 ---
 
