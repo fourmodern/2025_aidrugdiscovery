@@ -36,21 +36,16 @@ AI 기반 신약개발의 전 과정을 다루는 집중 워크숍 실습 자료
 |------|------|------|-----|-------|
 | T001_mod | TCGA 데이터 분석 | TCGA 암 유전체 데이터로 차등 발현 유전자 분석, PCA, 생존 분석 수행 | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/T001_mod.ipynb) |
 | T002 | GNN 딥러닝 | PyTorch Geometric 기반 그래프 신경망으로 유전자-표적 관계 예측 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/T002_deeplearning.ipynb) |
-| T004 | LLM Co-Scientist | LangChain + Google Gemini를 활용한 NSCLC 표적 탐색 AI 에이전트 | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/T004_nsclc_llm_coscientist.ipynb) |
 | t041 | MolGen | 사전 학습된 분자 생성 모델로 SMILES/SELFIES 기반 신규 분자 생성 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t041_molgen.ipynb) |
-| t042 | MolT5 | T5 기반 분자-텍스트 상호 변환 (분자 설명 생성, 텍스트에서 분자 생성) | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t042_molt5.ipynb) |
 | t043 | VAE 분자 생성 | 변분 오토인코더(VAE)로 약물 분자의 잠재 공간 학습 및 신규 분자 생성 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t043_vae.ipynb) |
 | t045 | DiffDock | 확산 모델 기반 AI 분자 도킹 (DiffDock) | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t045_diffdock.ipynb) |
 | t046 | RFdiffusion | RFdiffusion으로 목표 기능을 가진 단백질 구조를 de novo 설계 | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t046_rfdiffusion.ipynb) |
 | t047 | Chai-1 | Chai-1 모델로 단백질-리간드 복합체 3D 구조 예측 | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t047_chai1.ipynb) |
 | t048 | DDPM | Denoising Diffusion Probabilistic Model 원리 학습 및 이미지 생성 실습 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t048_DDPM.ipynb) |
-| t050 | RAG | PDF 문서 기반 로컬 RAG 파이프라인 구축 (신약개발 질의응답) | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t050_simple-local-rag.ipynb) |
-| t110 | ESM-2 | ESM-2 단백질 언어 모델로 펩타이드 결합 최적화 | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t110_esm2_peptide_optimization_tutorial.ipynb) |
-| t111 | **ESM3** | 생성형 멀티모달 단백질 모델로 서열 설계(inpainting) + 구조 예측 + 신뢰도(pTM/pLDDT) | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day02/t111_esm3_protein_design.ipynb) |
 
 강의 슬라이드 PDF 3종이 `Day02/` 폴더에 포함되어 있습니다.
 
-`t111`은 워크숍 이후 추가된 실습입니다. `t110`(ESM-2)이 masked LM 스코어링 방식이라면, `t111`(ESM3)은 생성형 멀티모달 방식으로 같은 문제에 접근합니다.
+> 언어모델 관련 실습(LLM Co-Scientist·MolT5·RAG·ESM-2·ESM3)은 **[Day 5](#day-5---언어모델-실습)** 로 이동했습니다.
 
 ---
 
@@ -78,6 +73,22 @@ AI 기반 신약개발의 전 과정을 다루는 집중 워크숍 실습 자료
 | REINVENT4 | de novo 생성 + RL 최적화 | 산업계 표준 오픈소스 프레임워크(AstraZeneca). 사전학습 prior로 de novo 생성 → 평가·필터 → **QED 목적함수 강화학습(staged learning)**. GPU 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day4/reinvent4_denovo_optimization.ipynb) |
 
 > 생성 결과는 **후보 제안(가설)** 이며 실험(합성·assay) 검증 전까지 결론이 아닙니다. `mol_generation_practical`은 CPU로도 도는 개념 데모이고, `t041`(MolGen ~1.4GB 다운로드)·`t043`는 GPU 권장, `reinvent4`는 **GPU 필수**(설치 수 분 + 설치 직후 런타임 1회 재시작이 필요할 수 있음)입니다.
+
+---
+
+## Day 5 - 언어모델 실습
+
+일반 LLM·에이전트부터 과학 언어모델(단백질 LM, 화학 LM)까지, 신약개발에서의 **언어모델 활용**을 실습합니다. 현행 Colab 환경에서 동작하도록 갱신했습니다.
+
+| 번호 | 주제 | 설명 | GPU | Colab |
+|------|------|------|-----|-------|
+| T004 | LLM Co-Scientist | LangChain + LLM 기반 NSCLC 표적 탐색·검증 AI 에이전트 (API 키 필요) | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day5/T004_nsclc_llm_coscientist.ipynb) |
+| t042 | MolT5 (화학 LM) | T5 기반 분자↔텍스트 상호 변환 (분자 설명 생성, 텍스트→분자 생성) | | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day5/t042_molt5.ipynb) |
+| t050 | RAG | PDF 문서 기반 로컬 RAG 파이프라인 (신약개발 질의응답) | 필수 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day5/t050_simple-local-rag.ipynb) |
+| t110 | ESM-2 (단백질 LM) | ESM-2 단백질 언어모델로 펩타이드 결합 최적화 (masked LM 스코어링) | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day5/t110_esm2_peptide_optimization_tutorial.ipynb) |
+| t111 | ESM3 (단백질 LM) | 생성형 멀티모달 단백질 모델로 서열 설계(inpainting) + 구조 예측 + 신뢰도(pTM/pLDDT) | 권장 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/Day5/t111_esm3_protein_design.ipynb) |
+
+> `t110`(ESM-2)이 masked LM 스코어링 방식이라면, `t111`(ESM3)은 생성형 멀티모달 방식으로 같은 문제에 접근합니다. `T004`(LLM 에이전트)는 LLM API 키가 필요합니다.
 
 ---
 
