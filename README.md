@@ -90,6 +90,30 @@ AI 기반 신약개발의 전 과정을 다루는 집중 워크숍 실습 자료
 
 > `t110`(ESM-2)이 masked LM 스코어링 방식이라면, `t111`(ESM3)은 생성형 멀티모달 방식으로 같은 문제에 접근합니다. `T004`(LLM 에이전트)는 LLM API 키가 필요합니다.
 
+### 심화 — PDE5 저해제 발굴 에이전트 하네스 (`dd-harness.zip`)
+
+Colab이 아니라 **Claude Desktop(Code 탭) + Docker 샌드박스**로 돌리는 자율 에이전트 하네스입니다. 자연어 목표 → 계획 → 단계별 검증 게이트 → 투고 패키지까지, PDE5 저해제 후보를 조사·생성·평가합니다. 모든 계산(RDKit·ChEMBL)은 Docker 컨테이너 안에서만 실행되어 **호스트(맥/Windows)를 오염시키지 않습니다**.
+
+**사용법**
+
+1. **Docker Desktop 설치 후 실행 상태로 둡니다** (하네스 도는 내내 켜져 있어야 함). 맥/Windows: <https://www.docker.com/products/docker-desktop>
+2. `dd-harness.zip`을 내려받아 **압축을 풉니다** → `pde5-harness/` 폴더 생성.
+3. **Claude Desktop의 Claude Code로 그 폴더에 들어갑니다.**
+4. 폴더에서 샌드박스 점검 (OS 공통):
+   ```
+   python run_harness.py check
+   ```
+   → **`rdkit ok True`** 가 나오면 준비 완료. (최초 1회는 컨테이너 이미지 빌드로 수 분, 이후 캐시)
+5. Claude Desktop **Code 탭**에서:
+   ```
+   SETUP.md, run.md, CLAUDE.md 읽고 harness 자율 실행해줘
+   ```
+
+> - `run_harness.py`가 OS(맥/Windows/Linux)를 자동 감지하므로 자기 OS를 몰라도 됩니다. 파이썬은 표준 라이브러리만 쓰니 **아무 Python 3.x**면 됩니다(패키지 설치 불필요).
+> - 폴더 안의 **`SETUP.md`(설치·실행 가이드) / `run.md`(단계별 실행) / `CLAUDE.md`(에이전트 규약)** 에 상세가 있습니다.
+> - 컨테이너=계산(RDKit 생성·필터·채점, ChEMBL 수집), Claude 본체=문헌조사·판단·문서화(보고서/원고) 역할 분담.
+> - 결과는 **후보 제안(가설)** 이며 합성·assay 실험 검증 전까지 결론이 아닙니다.
+
 ---
 
 ## 추가 자료
