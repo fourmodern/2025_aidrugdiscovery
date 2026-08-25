@@ -10,17 +10,17 @@
 | 2교시 | **SMILES & 분자 기술자** — SMILES 문법·canonical·SMARTS, 분자 기술자(0D~3D)·지문(ECFP) | `2교시_SMILES와_분자기술자.pdf` (50p) |
 | 3교시 | **QSAR** — 기술자→모델, 워크플로, 모델(MLR/PLS/RF/GBM/DL), **검증(CV·y-scrambling·외부검증)·적용범위·OECD 5원칙** | `3교시_QSAR.pdf` (52p) |
 
-## 실습 노트북 (Colab) — 주제별 3종
+## 실습 노트북 (Colab) — 주제별 3종 (특징 → 모델 → 응용 순서)
 
 | # | 노트북 | 내용 | Colab |
 |---|--------|------|-------|
-| 01 | QSAR 회귀 & 결과분석 | ESOL 용해도 회귀 → 검증(CV·y-scramble·적용범위) → **8종 결과분석 시각화**(pred-vs-actual·잔차·y-scramble 분포·permutation importance·learning curve·**Williams/leverage plot**·상관 히트맵) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/01_qsar_regression_analysis.ipynb) |
-| 02 | 특징 엔지니어링 & 전이학습 | ECFP → **low-variance + 공선성 필터링**(2048→368), **사전학습 분자표현(ChemBERTa=MolCLR류) 임베딩 → 전통 ML(전이학습)**, 표현 4종 비교 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/02_features_transfer_learning.ipynb) |
-| 03 | ADME/T 예측 (다중 엔드포인트) | **BBBP**(혈뇌장벽·분류·ROC-AUC) + **Lipophilicity**(logD·회귀) — 같은 기술자→모델, 엔드포인트/지표만 다름 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/03_admet_prediction.ipynb) |
+| 01 | **분자 특징 생성 & 분석 (EDA)** | SMILES→기술자+ECFP 계산 → **특징 EDA**(분포·target 상관·상관 히트맵·화학공간 PCA/UMAP·ECFP 비트 통계) → **low-variance + 공선성 필터링**(2048→368). 모델링 전 특징을 만들고 이해 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/01_feature_engineering_analysis.ipynb) |
+| 02 | **QSAR 모델링 & 결과분석 + 전이학습** | 01 특징으로 회귀(Ridge/RF/GB) → 검증(CV·y-scramble·적용범위) → **8종 결과분석 시각화**(Williams/leverage plot 등) → **ChemBERTa(=MolCLR류) 전이학습**·표현 4종 비교 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/02_qsar_modeling.ipynb) |
+| 03 | **ADME/T 예측 (다중 엔드포인트)** | **BBBP**(혈뇌장벽·분류·ROC-AUC) + **Lipophilicity**(logD·회귀) — 같은 기술자→모델, 엔드포인트/지표만 다름 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/03_admet_prediction.ipynb) |
 
 ### 실측 결과(재현 시 값은 소폭 변동)
-- **01 QSAR(ESOL 용해도)**: 기술자+GB R² **0.875**·RF 0.874·Ridge 0.77, 5-fold CV **0.896±0.015**, **y-scramble −0.21**(우연상관 아님), AD 적용범위 94%, 주요 기술자 **logP·MolMR·Heteroatoms**
-- **02 특징/전이학습**: ECFP 필터 **2048→368**(82%↓, 성능 유지·과적합↓), 표현별 R²(RF) 기술자 0.867·ECFP 0.72·**ChemBERTa 임베딩 0.70(Ridge 0.785)** — 밀집 사전학습 표현+선형모델 궁합 확인
+- **01 특징**: ESOL 1128분자, logS 상관 Top3 **logP 0.83·MolMR 0.70·MW 0.64**, ECFP 필터 **2048→368**(82%↓, train에서만 학습해 누수 방지)
+- **02 모델링/전이학습**: 기술자+GB R² **0.875**, 5-fold CV **0.896±0.015**, **y-scramble −0.21**(우연상관 아님), AD 적용범위 94%; 표현별 best R² 기술자 0.874·ECFP 0.72·필터ECFP 0.72·**ChemBERTa 0.785**
 - **03 ADME/T**: BBBP **ROC-AUC 0.938**(CV 0.921±0.009), Lipophilicity **R² 0.673**(CV 0.666±0.009)
 
 > ⚠️ 모든 수치는 실제 공개 데이터(ESOL·BBBP·Lipophilicity)로 노트북이 직접 계산한 값(무-날조). ChemBERTa는 자기지도 사전학습 분자 LM으로 전이학습을 시연하며, 그래프 기반 **MolCLR**(Wang 2022)은 동종 접근으로 노트북에 개념 소개.
