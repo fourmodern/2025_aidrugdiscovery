@@ -9,6 +9,7 @@
 | 1교시 | **화학정보학 & 분자구조 표현** — 화학정보학 개요·신약 파이프라인, 분자 그래프·connection table·InChI·2D/3D·파일포맷 | `1교시_화학정보학과_분자구조표현.pdf` (53p) |
 | 2교시 | **SMILES & 분자 기술자** — SMILES 문법·canonical·SMARTS, 분자 기술자(0D~3D)·지문(ECFP) | `2교시_SMILES와_분자기술자.pdf` (50p) |
 | 3교시 | **QSAR** — 기술자→모델, 워크플로, 모델(MLR/PLS/RF/GBM/DL), **검증(CV·y-scrambling·외부검증)·적용범위·OECD 5원칙** | `3교시_QSAR.pdf` (52p) |
+| 4교시 | **약물 최적화 & ADMET** — ~10^60 화학공간에서 **약효만이 아니라 다중 파라미터 최적화(MPO)**, ADMET(A/D/M/E/T)·리간드효율·CNS MPO·QED·Pareto·DMTA·attrition | `4교시_약물최적화_ADMET.pdf` (49p) |
 
 ## 실습 노트북 (Colab) — 주제별 3종 (특징 → 모델 → 응용 순서)
 
