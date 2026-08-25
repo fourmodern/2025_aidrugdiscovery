@@ -14,12 +14,12 @@
 
 | 노트북 | 내용 | Colab |
 |--------|------|-------|
-| QSAR 실습 | SMILES→**RDKit 기술자/ECFP 지문**→**QSAR 모델**(logS 예측)→**검증(CV·y-scramble·적용범위)**→시각화. 실제 ESOL(1128분자) 데이터 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/qsar_practical.ipynb) |
+| QSAR & ADMET 실습 | SMILES→**RDKit 기술자/ECFP 지문**→**QSAR 회귀**(용해도 logS)+**ADMET 분류**(혈뇌장벽 BBBP)→**검증(CV·y-scramble·적용범위·ROC-AUC)**→시각화. 실제 ESOL(1128)·BBBP(2039) 데이터 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/qsar_practical.ipynb) |
 
 ### 실습 실측 결과(재현 시 값은 소폭 변동)
-- 테스트 R²: 기술자+RandomForest **0.87**, 기술자+Ridge 0.77, ECFP+RF 0.72 → "표현이 성능을 가른다"
-- 5-fold CV R² **0.89±0.02**, **y-scramble −0.21**(우연상관 아님 증명), 적용범위 **내부 RMSE 0.71 < 외부 1.32**
-- 용해도 주요 기술자: **logP·MW·TPSA**
+- **QSAR(회귀·용해도)**: 테스트 R² 기술자+RF **0.87**·Ridge 0.77·ECFP+RF 0.72, 5-fold CV **0.89±0.02**, **y-scramble −0.21**(우연상관 아님), 적용범위 **내부 RMSE 0.71 < 외부 1.32**, 주요 기술자 **logP·MW·TPSA**
+- **ADMET(분류·혈뇌장벽 BBBP)**: ECFP+RF **ROC-AUC 0.938**·정확도 0.917, 5-fold CV ROC-AUC **0.921±0.009**
+- → 회귀든 분류든 **동일한 "기술자→모델" 파이프라인**
 
 > ⚠️ 데이터·수치는 모두 실제 측정/계산값(무-날조). 교육용 데모이며 실제 QSAR는 scaffold split·외부검증·불확실성 정량이 필요하고, 예측은 실험 검증 전까지 결론이 아닙니다.
 
