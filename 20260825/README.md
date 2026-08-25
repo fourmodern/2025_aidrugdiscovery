@@ -10,16 +10,20 @@
 | 2교시 | **SMILES & 분자 기술자** — SMILES 문법·canonical·SMARTS, 분자 기술자(0D~3D)·지문(ECFP) | `2교시_SMILES와_분자기술자.pdf` (50p) |
 | 3교시 | **QSAR** — 기술자→모델, 워크플로, 모델(MLR/PLS/RF/GBM/DL), **검증(CV·y-scrambling·외부검증)·적용범위·OECD 5원칙** | `3교시_QSAR.pdf` (52p) |
 
-## 실습 노트북 (Colab)
+## 실습 노트북 (Colab) — 주제별 3종
 
-| 노트북 | 내용 | Colab |
-|--------|------|-------|
-| QSAR & ADMET 실습 | SMILES→**RDKit 기술자/ECFP 지문**→**QSAR 회귀**(용해도 logS)+**ADMET 분류**(혈뇌장벽 BBBP)→**검증(CV·y-scramble·적용범위·ROC-AUC)**→시각화. 실제 ESOL(1128)·BBBP(2039) 데이터 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/qsar_practical.ipynb) |
+| # | 노트북 | 내용 | Colab |
+|---|--------|------|-------|
+| 01 | QSAR 회귀 & 결과분석 | ESOL 용해도 회귀 → 검증(CV·y-scramble·적용범위) → **8종 결과분석 시각화**(pred-vs-actual·잔차·y-scramble 분포·permutation importance·learning curve·**Williams/leverage plot**·상관 히트맵) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/01_qsar_regression_analysis.ipynb) |
+| 02 | 특징 엔지니어링 & 전이학습 | ECFP → **low-variance + 공선성 필터링**(2048→368), **사전학습 분자표현(ChemBERTa=MolCLR류) 임베딩 → 전통 ML(전이학습)**, 표현 4종 비교 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/02_features_transfer_learning.ipynb) |
+| 03 | ADME/T 예측 (다중 엔드포인트) | **BBBP**(혈뇌장벽·분류·ROC-AUC) + **Lipophilicity**(logD·회귀) — 같은 기술자→모델, 엔드포인트/지표만 다름 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260825/notebooks/03_admet_prediction.ipynb) |
 
-### 실습 실측 결과(재현 시 값은 소폭 변동)
-- **QSAR(회귀·용해도)**: 테스트 R² 기술자+RF **0.87**·Ridge 0.77·ECFP+RF 0.72, 5-fold CV **0.89±0.02**, **y-scramble −0.21**(우연상관 아님), 적용범위 **내부 RMSE 0.71 < 외부 1.32**, 주요 기술자 **logP·MW·TPSA**
-- **ADMET(분류·혈뇌장벽 BBBP)**: ECFP+RF **ROC-AUC 0.938**·정확도 0.917, 5-fold CV ROC-AUC **0.921±0.009**
-- → 회귀든 분류든 **동일한 "기술자→모델" 파이프라인**
+### 실측 결과(재현 시 값은 소폭 변동)
+- **01 QSAR(ESOL 용해도)**: 기술자+GB R² **0.875**·RF 0.874·Ridge 0.77, 5-fold CV **0.896±0.015**, **y-scramble −0.21**(우연상관 아님), AD 적용범위 94%, 주요 기술자 **logP·MolMR·Heteroatoms**
+- **02 특징/전이학습**: ECFP 필터 **2048→368**(82%↓, 성능 유지·과적합↓), 표현별 R²(RF) 기술자 0.867·ECFP 0.72·**ChemBERTa 임베딩 0.70(Ridge 0.785)** — 밀집 사전학습 표현+선형모델 궁합 확인
+- **03 ADME/T**: BBBP **ROC-AUC 0.938**(CV 0.921±0.009), Lipophilicity **R² 0.673**(CV 0.666±0.009)
+
+> ⚠️ 모든 수치는 실제 공개 데이터(ESOL·BBBP·Lipophilicity)로 노트북이 직접 계산한 값(무-날조). ChemBERTa는 자기지도 사전학습 분자 LM으로 전이학습을 시연하며, 그래프 기반 **MolCLR**(Wang 2022)은 동종 접근으로 노트북에 개념 소개.
 
 > ⚠️ 데이터·수치는 모두 실제 측정/계산값(무-날조). 교육용 데모이며 실제 QSAR는 scaffold split·외부검증·불확실성 정량이 필요하고, 예측은 실험 검증 전까지 결론이 아닙니다.
 
