@@ -1,0 +1,41 @@
+ESMC: Transformer Engine is not installed; falling back to pure-PyTorch LayerNorm+Linear / LayerNorm+MLP. Outputs will differ numerically - measured on the unnormalized residual stream (before the final LayerNorm), ~O(10) max-diff in fp32 and ~O(100) in bf16; after the final LayerNorm these shrink to a few ULP and perplexity stays within rounding noise. Install with `pip install transformer-engine[pytorch]` to enable fused fp32-reduction LayerNorm.
+ESMC: neither xformers nor flash-attn is installed; falling back to PyTorch ``F.scaled_dot_product_attention``. The attention reduction order in bf16 differs from a fused kernel by ~1 bf16 ULP per attention block; compounded across the 80-block stack this reaches ~O(100) max-diff on the unnormalized residual stream. Install an xformers build matching your PyTorch and CUDA versions for a fused attention kernel.
+ESMC: flash-attn rotary kernel not installed; falling back to pure-PyTorch RoPE. For faster GPU inference run `pip install flash-attn`.
+/root/v312/lib/python3.12/site-packages/torch/jit/_script.py:1488: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+import ok 17.386869430541992
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 739.34it/s]
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 3590.45it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  3.88it/s]Fetching 2 files: 100%|██████████| 2/2 [00:05<00:00,  2.51s/it]Fetching 2 files: 100%|██████████| 2/2 [00:05<00:00,  2.51s/it]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 1227.66it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files: 100%|██████████| 2/2 [00:00<00:00, 2022.81it/s]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  5.49it/s]Fetching 2 files: 100%|██████████| 2/2 [00:07<00:00,  3.68s/it]Fetching 2 files: 100%|██████████| 2/2 [00:07<00:00,  3.68s/it]
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:00<00:00,  5.24it/s]Fetching 2 files: 100%|██████████| 2/2 [00:06<00:00,  3.19s/it]Fetching 2 files: 100%|██████████| 2/2 [00:06<00:00,  3.19s/it]
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files: 100%|██████████| 11/11 [00:00<00:00, 3143.30it/s]
+MODEL_LOAD_SEC 46.9
+Loading CCD dictionary from /root/.cache/huggingface/hub/models--biohub--ESMFold2/snapshots/8fc3ff471022fdce52c77030685eb775de0c00a3/ccd.pkl
+Traceback (most recent call last):
+  File "/workspace/run_design.py", line 9, in <module>
+    seq, trajectory, results = app.design(
+                               ^^^^^^^^^^^
+  File "/workspace/esm/cookbook/tutorials/binder_design.py", line 1330, in design
+    return design_binder(
+           ^^^^^^^^^^^^^^
+  File "/workspace/esm/cookbook/tutorials/binder_design.py", line 1128, in design_binder
+    logits, sequences, iptm = run_step(
+                              ^^^^^^^^^
+  File "/workspace/esm/cookbook/tutorials/binder_design.py", line 1055, in run_step
+    fold_result = fold_and_get_distogram(
+                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/esm/cookbook/tutorials/binder_design.py", line 703, in fold_and_get_distogram
+    output = model(
+             ^^^^^^
+  File "/root/v312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1779, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/v312/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1790, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/esm/esm/models/esmfold2/experimental.py", line 904, in forward
+    raise TypeError(
+TypeError: EsmFold2ExperimentalModel.forward() got unexpected keyword argument(s) ['calculate_confidence', 'disto_cond', 'disto_cond_mask'].

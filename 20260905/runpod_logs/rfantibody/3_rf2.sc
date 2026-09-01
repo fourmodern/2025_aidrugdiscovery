@@ -1,0 +1,17 @@
+interaction_pae	pae	pred_lddt	target_aligned_antibody_rmsd	target_aligned_cdr_rmsd	framework_aligned_antibody_rmsd	framework_aligned_cdr_rmsd	framework_aligned_H1_rmsd	framework_aligned_H2_rmsd	framework_aligned_H3_rmsd	framework_aligned_L1_rmsd	framework_aligned_L2_rmsd	framework_aligned_L3_rmsd	tag
+20.72	8.99	0.91	23.98	21.69	0.66	1.15	1.11	0.44	1.68	NaN	NaN	NaN	samples_design_0_dldesign_0_best
+18.55	8.11	0.91	15.18	13.25	0.61	1.1	0.9	0.32	1.76	NaN	NaN	NaN	samples_design_0_dldesign_1_best
+20.95	9.09	0.91	20.68	9.97	0.63	1.16	1.18	0.33	1.67	NaN	NaN	NaN	samples_design_0_dldesign_2_best
+18.18	7.95	0.91	22.71	18.6	0.53	0.92	0.83	0.34	1.39	NaN	NaN	NaN	samples_design_0_dldesign_3_best
+17.67	7.86	0.9	14.87	15.06	0.59	1.13	0.43	0.57	1.66	NaN	NaN	NaN	samples_design_1_dldesign_0_best
+17.75	7.89	0.91	19.28	14.74	0.58	1.06	0.54	0.57	1.52	NaN	NaN	NaN	samples_design_1_dldesign_1_best
+20.18	8.9	0.91	14.99	13.85	0.66	1.31	0.53	0.65	1.92	NaN	NaN	NaN	samples_design_1_dldesign_2_best
+6.22	3.12	0.91	1.59	1.38	0.51	0.76	0.56	0.29	1.06	NaN	NaN	NaN	samples_design_1_dldesign_3_best
+20.82	9.01	0.92	32.93	17.7	0.55	1.06	1.44	0.76	0.76	NaN	NaN	NaN	samples_design_2_dldesign_0_best
+18.48	8.06	0.92	29.08	19.81	0.56	1.06	1.43	0.87	0.64	NaN	NaN	NaN	samples_design_2_dldesign_1_best
+20.53	8.9	0.92	51.36	31.15	0.49	0.89	1.12	0.66	0.78	NaN	NaN	NaN	samples_design_2_dldesign_2_best
+18.11	7.89	0.92	29.05	20.41	0.57	1.14	1.32	1.21	0.77	NaN	NaN	NaN	samples_design_2_dldesign_3_best
+19.45	8.67	0.9	7.27	6.05	0.72	1.41	0.86	0.3	2.0	NaN	NaN	NaN	samples_design_3_dldesign_0_best
+18.52	8.26	0.9	7.43	6.85	0.97	2.03	0.56	0.49	3.01	NaN	NaN	NaN	samples_design_3_dldesign_1_best
+22.24	9.82	0.9	47.58	26.72	0.8	1.59	0.63	0.42	2.32	NaN	NaN	NaN	samples_design_3_dldesign_2_best
+18.77	8.35	0.9	8.13	7.33	0.93	1.96	0.61	0.45	2.9	NaN	NaN	NaN	samples_design_3_dldesign_3_best

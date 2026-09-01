@@ -19,15 +19,15 @@
 
 ## (a) 이론 5교시 — 강의 슬라이드
 
-이론 강의는 `slides/` 의 아래 슬라이드로 진행한다 (2026 모델 지형 갱신본):
+이론 강의는 `lecture_materials/` 의 아래 슬라이드로 진행한다 (2026 모델 지형 갱신본):
 
 | 교시 | 파일 |
 |------|------|
-| 1교시 | `slides/0912_1교시.pdf` / `.pptx` |
-| 2교시 | `slides/0912_2교시.pdf` / `.pptx` |
-| 3교시 | `slides/0912_3교시.pdf` / `.pptx` |
-| 4교시 | `slides/0912_4교시.pdf` / `.pptx` |
-| 5교시 | `slides/0912_5교시.pdf` / `.pptx` |
+| 1교시 | `lecture_materials/0912_1교시.pdf` / `.pptx` |
+| 2교시 | `lecture_materials/0912_2교시.pdf` / `.pptx` |
+| 3교시 | `lecture_materials/0912_3교시.pdf` / `.pptx` |
+| 4교시 | `lecture_materials/0912_4교시.pdf` / `.pptx` |
+| 5교시 | `lecture_materials/0912_5교시.pdf` / `.pptx` |
 
 2026 모델 지형(프론티어 LLM·단백질/화학 LM·치료제 파운데이션·에이전트/자율과학)의 검증된 사실 단일 소스는
 [`2026_landscape.md`](2026_landscape.md) 참고. 핵심 메시지: **"챗봇 → 워커(도구 실행 에이전트)"**,
