@@ -4,3 +4,8 @@
 20260824/**/boltz_in/
 20260824/**/boltz_out/
 **/__pycache__/
+**/notebooks/wiki/
+**/agent_report.md
+**/outputs/*.json
+**/outputs/*.md
+.env
