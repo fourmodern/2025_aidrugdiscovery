@@ -45,7 +45,7 @@
 | `t042_molt5.ipynb` (재사용) | 화학 언어모델 — MolT5 (SMILES↔텍스트 번역) | MolT5 (오픈, HF) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t042_molt5.ipynb) |
 | `t110_esm2_peptide_optimization_tutorial.ipynb` (재사용) | 단백질 언어모델 — ESM-2 펩타이드 최적화 | ESM-2 (오픈, HF) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t110_esm2_peptide_optimization_tutorial.ipynb) |
 | `t050_simple-local-rag.ipynb` (재사용) | RAG — 로컬 문서 검색 증강 생성 | 오픈 임베딩/LLM | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t050_simple-local-rag.ipynb) |
-| `T004_nsclc_llm_coscientist.ipynb` (재사용) | 다중 에이전트 co-scientist (NSCLC 사례) | LLM 에이전트 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/T004_nsclc_llm_coscientist.ipynb) |
+| `T004_pde5_llm_coscientist.ipynb` (재사용) | 다중 에이전트 co-scientist (PDE5/PAH 사례) | LLM 에이전트 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/T004_pde5_llm_coscientist.ipynb) |
 
 > 재사용 노트북 4종의 원본은 `../../2026_aidrugdiscovery/Day06_LLM_Agent/` 에 있다.
 > Colab 배지는 강의 리포(`fourmodern/2025_aidrugdiscovery`, `20260905/notebooks/`)에 업로드된 것을 가정한 경로다.
