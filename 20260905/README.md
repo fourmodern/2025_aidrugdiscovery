@@ -40,7 +40,12 @@
 
 ## (b) 메인 실습 — Claude Science (수강생 전원)
 
-**교재**: [`claude_science_pde5_practice.md`](claude_science_pde5_practice.md) — 단계별 프롬프트와 '확인할 것'.
+**⭐ 수강생용 핸드북(PDF, 25쪽)**: [`1128_실습핸드북.pdf`](1128_실습핸드북.pdf)
+— 0 준비물·사내망 도메인 / 1 설치(Windows 단계별 + macOS·Linux) / 2 수업 전 설정 4개 /
+3 다섯 단계 프롬프트 전문 / 4 막히는 곳·더 해볼 것. **이것 하나만 있으면 따라 할 수 있다.**
+
+**교재(Markdown)**: [`claude_science_pde5_practice.md`](claude_science_pde5_practice.md) — 단계별 프롬프트와 '확인할 것'.
+**강의 화면용 덱(PDF, 40쪽)**: [`1128_실습_클로드사이언스.pdf`](1128_실습_클로드사이언스.pdf)
 **도구 사실 근거**: [`claude_science_facts_202611.md`](claude_science_facts_202611.md) — 공식 문서 확인(2026-11-27).
 
 | 단계 | 하는 일 | 쓰는 것 |
