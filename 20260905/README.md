@@ -1,8 +1,8 @@
 # 6일차 실습 — 대규모 언어모델과 신약개발: LLM 에이전트 (2026)
 
-> 9/5 강의 6일차 **실습 자료 허브**. 자연어 목표 하나로 **타겟 조사 → 후보 검색 → ADMET 평가 → 보고서**
-> 전체 사이클을 자율 수행하는 신약개발 LLM 에이전트를, (1) **직접 만드는 무료 노트북** 과
-> (2) **Claude Code 하네스**(강사 데모) 두 방식으로 실습한다.
+> **11/28 강의 6일차 실습 자료 허브.** 수강생 전원이 각자 계정으로 **Claude Science** 를 써서
+> PDE5 저해제를 **동향 정리 → 논문 → 활성·decoy 데이터셋 → 도킹 → 점수 분포 판정** 까지 직접 수행한다.
+> 무료 대안(Colab 노트북)과 Claude Code 하네스(강사 데모)도 함께 둔다.
 
 [![No-Fabrication](https://img.shields.io/badge/policy-no--fabrication-red.svg)](#무-날조-원칙-반드시-읽기)
 [![Free-tier](https://img.shields.io/badge/practice-free%20(0원)-brightgreen.svg)](#무료로-실습하는-법-0원)
@@ -10,10 +10,12 @@
 
 ---
 
-## 실습 목표 (PDF 커리큘럼 6일차)
-1. **도구 등록(function calling):** PubMed · UniProt · ChEMBL · RDKit · 규칙기반 ADMET.
-2. **자율 실행:** 자연어 프롬프트 → 타겟 조사 → 후보 검색 → ADMET → 보고서 전체 사이클.
-3. **에이전트 고도화:** 도구 추가 · 실패 디버깅(재시도/폴백) · 안전(권한 최소화·키 격리·감사로그).
+## 실습 목표
+1. **도구를 쓰는 에이전트를 직접 운전한다** — 커넥터로 공개 DB(FDA·ChEMBL·PubChem·PDB·문헌)를 조회하고,
+   샌드박스에서 RDKit·smina 를 실행시킨다.
+2. **비교 실험을 설계한다** — 알려진 활성과 물성을 맞춘 decoy 를 같은 조건에 도킹해 점수 분포를 가른다.
+3. **판정하고 한계를 적는다** — 판정 기준을 분석 전에 정하고, 크기 교란을 통제하고,
+   '이 결과로 말할 수 없는 것'을 세 가지 이상 쓴다.
 
 ---
 
@@ -21,13 +23,14 @@
 
 이론 강의는 `lecture_materials/` 의 아래 슬라이드로 진행한다 (2026 모델 지형 갱신본):
 
-| 교시 | 파일 |
-|------|------|
-| 1교시 | `lecture_materials/0912_1교시.pdf` / `.pptx` |
-| 2교시 | `lecture_materials/0912_2교시.pdf` / `.pptx` |
-| 3교시 | `lecture_materials/0912_3교시.pdf` / `.pptx` |
-| 4교시 | `lecture_materials/0912_4교시.pdf` / `.pptx` |
-| 5교시 | `lecture_materials/0912_5교시.pdf` / `.pptx` |
+| 교시 | 파일 | 장수 |
+|------|------|------|
+| 1교시 LLM 원리 & 과학 LM | `lecture_materials/1128_1교시.pdf` / `.pptx` | 64 |
+| 2교시 LLM 활용 & 환각·RAG | `lecture_materials/1128_2교시.pdf` / `.pptx` | 71 |
+| 3교시 에이전트 원리·사례 | `lecture_materials/1128_3교시.pdf` / `.pptx` | 53 |
+| 4교시 하네스·Agentic 보안 | `lecture_materials/1128_4교시.pdf` / `.pptx` | 45 |
+| 5교시 자율 과학 · world model · lab in the loop | `lecture_materials/1128_5교시.pdf` / `.pptx` | 54 |
+| 실습 Claude Science · PDE5 | `lecture_materials/1128_실습_클로드사이언스.pdf` / `.pptx` | 40 |
 
 2026 모델 지형(프론티어 LLM·단백질/화학 LM·치료제 파운데이션·에이전트/자율과학)의 검증된 사실 단일 소스는
 [`2026_landscape.md`](2026_landscape.md) 참고. 핵심 메시지: **"챗봇 → 워커(도구 실행 에이전트)"**,
@@ -35,63 +38,41 @@
 
 ---
 
-## (b) 실습 노트북
+## (b) 메인 실습 — Claude Science (수강생 전원)
 
-모든 노트북은 **Colab 무료 런타임**에서 동작한다. Colab 배지를 클릭해 바로 실행.
+**교재**: [`claude_science_pde5_practice.md`](claude_science_pde5_practice.md) — 단계별 프롬프트와 '확인할 것'.
+**도구 사실 근거**: [`claude_science_facts_202611.md`](claude_science_facts_202611.md) — 공식 문서 확인(2026-11-27).
+
+| 단계 | 하는 일 | 쓰는 것 |
+|------|---------|---------|
+| ① 준비 | 설치·커넥터·키·검토 켜기, 프로젝트 규약 심기 | Settings |
+| ② 동향 | 승인 PDE5 저해제·물성·표적·활성 데이터 규모 | FDA · PubChem · ChEMBL · UniProt |
+| ③ 논문 | 선행 도킹·가상스크리닝 연구 10~15편 + DOI 검증 | Literature Graph(OpenAlex) · PubMed · literature review 스킬 |
+| ④ 데이터셋 | 1UDT 구조 + DUD-E 활성 16 · decoy 45 + 물성 맞춤 확인 | PDB · DUD-E · RDKit |
+| ⑤ 도킹 | smina(CPU) 도킹 → 점수 분포·ROC·교란 통제 → 판정 | smina · RDKit |
+
+**사전 준비(수강생)**: Pro 이상 계정 + 앱 설치 + 로그인까지 미리. 첫 실행에 약 5 GB를 내려받으므로
+수업 중 설치는 금물. 수업 직전 체크 4개 — ChEMBL·PubMed 디렉터리 커넥터 추가 / OpenAlex 무료 키 /
+연락 이메일 / **Auto-review 켜기**(Pro는 기본 off).
+
+> **강사 사전 검증 실행**(실습 덱의 수치는 전부 여기서 나온다): 활성 16 · decoy 45 를 1UDT 에
+> smina(exhaustiveness 8, seed 42)로 도킹 — 16 CPU 에서 약 10분. AUC 0.704, 95% CI [0.554, 0.838],
+> EF10% 1.91. **점 추정은 0.7 을 넘지만 신뢰구간 하한이 0.554 라 사전 판정선으로는 '약한 신호'다.**
+> 원자료: `lecture_materials/data/cs_screen_results.json`, 통계·그림: `gen_1128_cs_figs.py`.
+
+---
+
+## (c) 무료 대안 · 보조 실습 노트북
+
+계정이 없거나 더 해보고 싶은 수강생을 위한 Colab 노트북. 모두 **무료 런타임**에서 동작한다.
 
 | 노트북 | 내용 | 모델/도구 | Colab |
 |--------|------|-----------|-------|
-| **`notebooks/nb1_scientific_agent.ipynb`** ⭐신규 | 직접 만드는 "Claude Code식" 과학 에이전트 — function calling + ReAct 루프 + 엔드투엔드 자율 사이클 | PubMed/UniProt/ChEMBL/RDKit(무료), Gemini 무료 티어 or 무키 폴백 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/nb1_scientific_agent.ipynb) |
-| `t042_molt5.ipynb` (재사용) | 화학 언어모델 — MolT5 (SMILES↔텍스트 번역) | MolT5 (오픈, HF) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t042_molt5.ipynb) |
-| `t110_esm2_peptide_optimization_tutorial.ipynb` (재사용) | 단백질 언어모델 — ESM-2 펩타이드 최적화 | ESM-2 (오픈, HF) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t110_esm2_peptide_optimization_tutorial.ipynb) |
-| `t050_simple-local-rag.ipynb` (재사용) | RAG — 로컬 문서 검색 증강 생성 | 오픈 임베딩/LLM | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t050_simple-local-rag.ipynb) |
-| `T004_pde5_llm_coscientist.ipynb` (재사용) | 다중 에이전트 co-scientist (PDE5/PAH 사례) | LLM 에이전트 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/T004_pde5_llm_coscientist.ipynb) |
-
-> 재사용 노트북 4종의 원본은 `../../2026_aidrugdiscovery/Day06_LLM_Agent/` 에 있다.
-> Colab 배지는 강의 리포(`fourmodern/2025_aidrugdiscovery`, `20260905/notebooks/`)에 업로드된 것을 가정한 경로다.
-
-### nb1 노트북 셀 구성 (핵심 신규)
-1. 에이전트 개념(LLM+도구+계획+검증, ReAct/function calling) + 2026 맥락.
-2. 설치(rdkit/requests) & 임포트.
-3. **도구 5종 정의** — 전부 실 API/실계산: `search_pubmed`, `lookup_uniprot`, `search_chembl_actives`, `mol_properties`, `admet_flags`.
-4. **함수 호출 스키마 등록**(name/description/parameters, 3-벤더 공통 형식).
-5. **에이전트 루프** — 무료 우선: Gemini 무료 티어(실 LLM) → 유료(OpenAI/Anthropic) → 무키 결정론 폴백.
-6. **엔드투엔드 데모** — 자연어 목표 → 자율 실행 → 마크다운 보고서 + RDKit 구조 그림.
-7. **고도화** — 도구 추가(PubChem 예시) · 재시도/폴백 디버깅 · 안전 3원칙 + 감사 로그.
-8. 한계·주의(환각·규칙기반 ADMET 한계·검증 필요).
-
----
-
-## (c) PDE5 하네스 실습 (Claude Code)
-
-`pde5_harness/` — nb1의 원리를 실무 코딩 에이전트 **하네스**로 구현한 버전.
-`CLAUDE.md` 규약 + PostToolUse 검증 훅으로 "자연어 지시 하나 → PLAN → 단계별 검증 게이트 → 보고서"를 자율 실행한다.
-
-- 상세 단계별 안내: **[`pde5_harness_실습가이드.md`](pde5_harness_실습가이드.md)**
-- 빠른 시작 (로컬 .venv, Docker 불필요):
-  ```bash
-  cd pde5_harness
-  python run_harness.py check     # rdkit ok / 스크립트 점검
-  claude                          # Claude Code로 폴더 열기
-  # 프롬프트: "SETUP·CLAUDE.md 읽고 harness 자율 실행해줘"
-  ```
-- ⚠️ **Claude Code는 유료 구독** 이 필요하다 → 이 파트는 **강사 데모**로 진행한다.
-  구독이 없는 수강생의 **무료 대안은 위 `nb1_scientific_agent.ipynb`**(동일 개념, 무료 Colab).
-
----
-
-## 하네스 없이 재현하기 — Claude for Science 용 프롬프트
-
-로컬 파일(`CLAUDE.md`·스킬·스크립트) 없이 같은 연구를 수행하려면
-[**`pde5_harness/prompts/claude_for_science.md`**](pde5_harness/prompts/claude_for_science.md)
-하나만 열면 된다. 하네스가 파일로 강제하던 계약을 프롬프트 본문이 대신 진다.
-
-- **A. 마스터 프롬프트** (약 2,000단어) — 그대로 붙여넣는다
-- **B. 각 조항이 무엇을 막는가** — 21개 조항을 실제 실패 사건과 짝지은 표
-- **C. 다른 표적으로 바꿀 때** — 치환할 자리 · 이 연구에 맞춰진 값 · 바꾸면 안 되는 다섯
-
-> 이 연구는 같은 표적·같은 도구로 세 판본을 냈고 결론이 세 번 달랐다. 세 번 모두 자동
-> 검증 게이트를 전부 통과했으며, 오류를 잡은 것은 매번 외부 비평이었다.
+| **`notebooks/nb1_scientific_agent.ipynb`** | 직접 만드는 과학 에이전트 — function calling + ReAct 루프 | PubMed/UniProt/ChEMBL/RDKit, Gemini 무료 티어 or 무키 폴백 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/nb1_scientific_agent.ipynb) |
+| `t042_molt5.ipynb` | 화학 언어모델 — MolT5 (SMILES↔텍스트) | MolT5 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t042_molt5.ipynb) |
+| `t110_esm2_peptide_optimization_tutorial.ipynb` | 단백질 LM — ESM-2 펩타이드 최적화 | ESM-2 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t110_esm2_peptide_optimization_tutorial.ipynb) |
+| `t050_simple-local-rag.ipynb` | RAG — 로컬 문서 검색 증강 생성 | 오픈 임베딩/LLM | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/t050_simple-local-rag.ipynb) |
+| `T004_pde5_llm_coscientist.ipynb` | 다중 에이전트 co-scientist (PDE5/PAH) | LLM 에이전트 | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fourmodern/2025_aidrugdiscovery/blob/main/20260905/notebooks/T004_pde5_llm_coscientist.ipynb) |
 
 ---
 
